@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart To-Do List</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <h1>Smart To-Do List</h1>
+
+  <form id="task-form">
+    <input type="text" id="task-input" placeholder="Enter a task">
+    <select id="priority-select">
+      <option value="Low">Low</option>
+      <option value="Medium" selected>Medium</option>
+      <option value="High">High</option>
+    </select>
+    <input type="date" id="due-date">
+    <button type="submit">Add Task</button>
+  </form>
+
+  <p id="error-msg"></p>
+  <input type="text" id="search-input" placeholder="Search tasks...">
+
+  <div id="filter-buttons">
+    <button data-filter="all">All</button>
+    <button data-filter="active">Active</button>
+    <button data-filter="completed">Completed</button>
+  </div>
+
+  <p id="task-count">Total: 0 | Active: 0 | Completed: 0</p>
+  <ul id="task-list"></ul>
+
+  
+</body>
+</html>
