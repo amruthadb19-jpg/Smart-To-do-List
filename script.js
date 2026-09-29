@@ -116,6 +116,9 @@ filterButtons.forEach(btn => {
   btn.addEventListener("click", () => {
     currentFilter = btn.dataset.filter;
     renderTasks();
+
+    filterButtons.forEach(b => b.classList.remove("active-filter"));
+    btn.classList.add("active-filter");
   });
 });
 

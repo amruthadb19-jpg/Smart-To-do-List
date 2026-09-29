@@ -10,15 +10,12 @@ body {
   min-height: 100vh;
 }
 
-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
 header h1 {
+  text-align: center;
   color: white;
   font-size: 2.2rem;
   text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+  margin-bottom: 20px;
 }
 
 main {
@@ -50,6 +47,10 @@ main {
   border: 2px solid #ddd;
   border-radius: 8px;
   font-size: 14px;
+}
+
+input::placeholder {
+  color: #aaa;
 }
 
 select, input[type="date"] {
@@ -109,6 +110,11 @@ select, input[type="date"] {
   color: white;
 }
 
+#filter-buttons button.active-filter {
+  background: #764ba2;
+  color: white;
+}
+
 #task-count {
   font-weight: 600;
   color: #444;
@@ -118,42 +124,84 @@ select, input[type="date"] {
   display: inline-block;
 }
 
+/* ---------- Task list: the main upgrade ---------- */
 #task-list {
   list-style: none;
   padding: 0;
   display: grid;
-  gap: 10px;
-  margin-top: 15px;
+  gap: 12px;
+  margin-top: 18px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+#task-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+#task-list::-webkit-scrollbar-thumb {
+  background: #764ba2;
+  border-radius: 10px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 #task-list li {
-  background: #fafafa;
-  padding: 12px 15px;
-  border-left: 6px solid gray;
-  border-radius: 10px;
+  background: linear-gradient(135deg, #ffffff, #f7f4fb);
+  padding: 16px 18px;
+  border-left: 7px solid gray;
+  border-radius: 14px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  transition: transform 0.15s;
+  gap: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: fadeIn 0.3s ease;
+  font-size: 15px;
 }
 
 #task-list li:hover {
-  transform: translateX(4px);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.16);
 }
 
 #task-list li[data-priority="High"] { border-left-color: #e74c3c; }
 #task-list li[data-priority="Medium"] { border-left-color: #f39c12; }
 #task-list li[data-priority="Low"] { border-left-color: #27ae60; }
 
+#task-list li span {
+  flex: 1;
+  font-weight: 500;
+  color: #333;
+  word-break: break-word;
+}
+
+#task-list input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  accent-color: #764ba2;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
 #task-list button {
-  padding: 6px 12px;
+  padding: 8px 14px;
   border: none;
-  border-radius: 6px;
+  border-radius: 20px;
   cursor: pointer;
   font-weight: 600;
+  font-size: 13px;
   color: white;
+  transition: transform 0.15s, opacity 0.15s;
+}
+
+#task-list button:hover {
+  transform: scale(1.08);
+  opacity: 0.92;
 }
 
 #task-list .edit {
@@ -164,6 +212,11 @@ select, input[type="date"] {
   background: #e74c3c;
 }
 
+.completed {
+  background: #f0f0f0 !important;
+  opacity: 0.75;
+}
+
 .completed span {
   text-decoration: line-through;
   color: gray;
@@ -172,5 +225,8 @@ select, input[type="date"] {
 @media (max-width: 500px) {
   #task-form {
     flex-direction: column;
+  }
+  #task-list li {
+    flex-wrap: wrap;
   }
 }
